@@ -1,0 +1,92 @@
+/* ViewProducts.css */
+
+/* Container Styling */
+.product-list {
+    padding: 30px;
+    background-color: #f1f3f5; /* Soft background color */
+}
+
+/* Alert Styling */
+.alert {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+
+/* Product Card Styling */
+.product-card {
+    border: 1px solid #dee2e6; /* Light border for separation */
+    border-radius: 10px; /* Rounded corners for modern look */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff; /* White background for cards */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+.product-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+}
+.card-img-top {
+    object-fit: cover;
+    height: 250px; /* Adjust height to fit images */
+    border-bottom: 1px solid #dee2e6; /* Divider between image and text */
+}
+.product-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333; /* Darker text for better contrast */
+    margin-bottom: 0.5rem;
+}
+.product-description {
+    font-size: 1rem;
+    color: #6c757d; /* Muted color for description */
+    margin-bottom: 0.75rem;
+}
+.product-price {
+    font-size: 1.5rem;
+    color: #28a745; /* Green color for price */
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.product-actions .btn {
+    width: 48%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.25rem; /* Rounded corners for buttons */
+    padding: 0.5rem 1rem;
+}
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+}
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Grid Gutter Styling */
+.g-4 {
+    gap: 1.5rem;
+}
+
+/* Spinner Styling */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.4em;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .product-card {
+        margin-bottom: 20px;
+    }
+}
