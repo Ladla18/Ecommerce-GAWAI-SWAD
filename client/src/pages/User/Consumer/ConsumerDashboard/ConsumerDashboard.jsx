@@ -31,7 +31,7 @@ console.log("consumerid",consumerId)
     checkLoginStatus();
     const fetchData = () => {
       axios
-        .get("http://localhost:3000/api/consumerdashboard", {
+        .get("https://ecommerce-gawai-swad.onrender.com/api/consumerdashboard", {
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -87,7 +87,7 @@ console.log("consumerid",consumerId)
                       objectFit: "cover",
                       margin: "10px auto",
                     }}
-                    src={`http://localhost:3000/${p.productImage}`}
+                    src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
                     width="200px"
                   />
                   <Card.Body>

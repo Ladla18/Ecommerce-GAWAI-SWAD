@@ -27,7 +27,7 @@ const navigate = useNavigate();
       if (consumerId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/categoryfilter/${consumerId}`
+            `https://ecommerce-gawai-swad.onrender.com/api/categoryfilter/${consumerId}`
           );
           setSeller(response.data.products);
           // Flatten all seller products into one array
@@ -69,7 +69,7 @@ useEffect(() => {
                       objectFit: "cover",
                       margin: "10px auto",
                     }}
-                    src={`http://localhost:3000/${p.productImage}`}
+                    src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
                     width="200px"
                   />
                   <Card.Body>

@@ -14,7 +14,7 @@ const [status, setStatus] = useState("");
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/viewproducts",
+          "https://ecommerce-gawai-swad.onrender.com/api/viewproducts",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -35,7 +35,7 @@ const [status, setStatus] = useState("");
     const handleRemoveItem = async (id) => {
       try {
         const response = await axios.delete(
-          `http://localhost:3000/api/deletesellerproduct/${id}`
+          `https://ecommerce-gawai-swad.onrender.com/api/deletesellerproduct/${id}`
         );
         setStatus(response.data.message);
         setProducts(products.filter((item) => item._id !== id));
@@ -81,7 +81,7 @@ const [status, setStatus] = useState("");
             <Card className="product-card mt-3" style={{ height: "30rem" }}>
               <Card.Img
                 variant="top"
-                src={`http://localhost:3000/${p.productImage}`}
+                src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
                 alt={p.productName}
               />
               <Card.Body>

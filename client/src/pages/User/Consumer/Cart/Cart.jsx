@@ -33,7 +33,7 @@ const Cart = () => {
       const fetchCartDetails = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/getcartitem/${consumerId}`
+            `https://ecommerce-gawai-swad.onrender.com/api/getcartitem/${consumerId}`
           );
           const filteredItems = response.data.filter((item) => !item.isOrdered);
           setCartItems(filteredItems);
@@ -60,7 +60,7 @@ const Cart = () => {
   const increaseQuantity = async (id, currentQuantity) => {
     const newQuantity = currentQuantity + 1;
     try {
-      await axios.post(`http://localhost:3000/api/updatequantity/${id}`, {
+      await axios.post(`https://ecommerce-gawai-swad.onrender.com/api/updatequantity/${id}`, {
         updatedQauntity: newQuantity,
       });
 
@@ -87,7 +87,7 @@ const Cart = () => {
   const handleRemoveItem = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/deletecartitem/${id}/${consumerId}`
+        `https://ecommerce-gawai-swad.onrender.com/api/deletecartitem/${id}/${consumerId}`
       );
       setStatus(response.data.message);
       setStatusName(response.data.deletedItem);
@@ -100,7 +100,7 @@ const Cart = () => {
   const placeOrder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/placeorders/${consumerId}`,
+        `https://ecommerce-gawai-swad.onrender.com/api/placeorders/${consumerId}`,
         cartItems
       ); // Assuming you are sending the item data with the request
       console.log(response.data);
@@ -135,7 +135,7 @@ const Cart = () => {
                         <div className="row my-2">
                           <div className="col-sm-4">
                             <img
-                              src={`http://localhost:3000/${item.productimage}`}
+                              src={`https://ecommerce-gawai-swad.onrender.com/${item.productimage}`}
                               width="100px"
                               alt=""
                             />

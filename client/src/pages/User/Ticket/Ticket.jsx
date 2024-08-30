@@ -49,7 +49,7 @@ const Ticket = () => {
     const fetchTickets = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/fetchticket/${consumerId}`
+          `https://ecommerce-gawai-swad.onrender.com/api/fetchticket/${consumerId}`
         );
         setTicketData(response.data);
         console.log(response.data);
@@ -76,7 +76,7 @@ const Ticket = () => {
     const raiseTicket = async () => {
       try {
         await axios.post(
-          `http://localhost:3000/api/raiseticket/${consumerId}`,
+          `https://ecommerce-gawai-swad.onrender.com/api/raiseticket/${consumerId}`,
           formData
         );
         setFormData({ title: "", description: "" }); // Reset form after submission
@@ -98,7 +98,7 @@ const Ticket = () => {
   };
   const closeTicket = async (id)=>{
     try{
-        const response = await axios.patch(`http://localhost:3000/api/closeticket/${id}`)
+        const response = await axios.patch(`https://ecommerce-gawai-swad.onrender.com/api/closeticket/${id}`)
     }
     catch(err){
         console.log(err);

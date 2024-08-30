@@ -48,7 +48,7 @@ const Header = () => {
       const fetchCartDetails = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/getcartitem/${consumerId}`
+            `https://ecommerce-gawai-swad.onrender.com/api/getcartitem/${consumerId}`
           );
           setCartItems(response.data);
           console.log(response.data);

@@ -28,7 +28,7 @@ const navigate = useNavigate()
       if (!consumerId) return;
       try {
         const response = await fetch(
-          `http://localhost:3000/api/yourorders/${consumerId}`
+          `https://ecommerce-gawai-swad.onrender.com/api/yourorders/${consumerId}`
         );
         const data = await response.json();
         const sortedOrders = (data.orders || []).sort(
@@ -48,7 +48,7 @@ const navigate = useNavigate()
       if (!consumerId) return;
       try {
         const response = await fetch(
-          `http://localhost:3000/api/singleorders/${consumerId}`
+          `https://ecommerce-gawai-swad.onrender.com/api/singleorders/${consumerId}`
         );
         const data = await response.json();
         const sortedSingleOrders = (data.orders || []).sort(
@@ -166,7 +166,7 @@ const navigate = useNavigate()
                           <tr key={product._id}>
                             <td style={tableCellStyle}>
                               <img
-                                src={`http://localhost:3000/${product.productimage}`}
+                                src={`https://ecommerce-gawai-swad.onrender.com/${product.productimage}`}
                                 alt={product.productname}
                                 style={{
                                   width: "60px",
@@ -251,7 +251,7 @@ const navigate = useNavigate()
                           <tr key={sp._id}>
                             <td style={tableCellStyle}>
                               <img
-                                src={`http://localhost:3000/${sp.productImage}`}
+                                src={`https://ecommerce-gawai-swad.onrender.com/${sp.productImage}`}
                                 alt={sp.productName}
                                 style={{
                                   width: "60px",

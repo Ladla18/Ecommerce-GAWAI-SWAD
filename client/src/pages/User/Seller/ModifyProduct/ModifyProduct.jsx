@@ -24,7 +24,7 @@ const ModifyProduct = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/getproductforedit/${params.id}`
+          `https://ecommerce-gawai-swad.onrender.com/api/getproductforedit/${params.id}`
         );
         console.log(response.data);
         setFormData({
@@ -94,7 +94,7 @@ const ModifyProduct = () => {
       const decoded = jwtDecode(token);
       const uid = decoded.user._id;
       const response = await axios.post(
-        `http://localhost:3000/api/updateproduct/${uid}/${params.id}`,
+        `https://ecommerce-gawai-swad.onrender.com/api/updateproduct/${uid}/${params.id}`,
         data,
         {
           headers: {
@@ -189,7 +189,7 @@ const ModifyProduct = () => {
           <div>
             Current Image{" "}
             <img
-              src={`http://localhost:3000/${formData.productImage}`}
+              src={`https://ecommerce-gawai-swad.onrender.com/${formData.productImage}`}
               width="50px"
               alt="Product"
             />

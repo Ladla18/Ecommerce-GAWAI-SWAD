@@ -42,7 +42,7 @@ const SpecificProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/specificproductdetail/${sid}/${pid}`
+          `https://ecommerce-gawai-swad.onrender.com/api/specificproductdetail/${sid}/${pid}`
         );
         setProduct(response.data.product);
         setSeller(response.data.seller);
@@ -57,7 +57,7 @@ const SpecificProduct = () => {
   const addtocart = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:3000/api/addtocart/${consumerId}/${pid}/${sid}`,
+        `https://ecommerce-gawai-swad.onrender.com/api/addtocart/${consumerId}/${pid}/${sid}`,
         {
           productname: product.productName,
           productprice: product.productPrice,
@@ -75,11 +75,11 @@ const SpecificProduct = () => {
   const sendEmail = async () => {
     try {
        const response2 = await axios.post(
-         `http://localhost:3000/api/placesingleorder/${consumerId}/${sid}`,
+         `https://ecommerce-gawai-swad.onrender.com/api/placesingleorder/${consumerId}/${sid}`,
          product
        ); // Assuming you are sending the item data with the request
        setCartMsg(response2.data.msg);
-       let response = await axios.post("http://localhost:3000/api/sendemail", {
+       let response = await axios.post("https://ecommerce-gawai-swad.onrender.com/api/sendemail", {
          email: consumerEmail,
          productname: product.productName,
          productprice: product.productPrice,
@@ -121,7 +121,7 @@ const SpecificProduct = () => {
       <div className="row product-container">
         <div className="col-md-6 text-center product-image-container">
           <img
-            src={`http://localhost:3000/${product.productImage}`}
+            src={`https://ecommerce-gawai-swad.onrender.com/${product.productImage}`}
             className="product-image"
             alt={product.productName}
           />

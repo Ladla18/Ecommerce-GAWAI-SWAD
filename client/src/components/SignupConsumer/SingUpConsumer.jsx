@@ -40,7 +40,7 @@ const SignupConsumer = () => {
     console.log(formData)
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/consumersignup",  {
+        "https://ecommerce-gawai-swad.onrender.com/api/consumersignup",  {
           consumername: formData.consumername,
           consumeremail: formData.consumeremail,
           consumerpassword: formData.consumerpassword

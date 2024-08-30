@@ -42,7 +42,7 @@ const AdminDashboard = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/getallusers`
+          `https://ecommerce-gawai-swad.onrender.com/api/getallusers`
         );
         setConsumers(response.data.consumers);
         setSellers(response.data.sellers);

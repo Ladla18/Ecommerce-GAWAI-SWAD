@@ -64,7 +64,7 @@ const navigate = useNavigate()
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/api/addproduct",
+        "https://ecommerce-gawai-swad.onrender.com/api/addproduct",
         data,
         {
           headers: {

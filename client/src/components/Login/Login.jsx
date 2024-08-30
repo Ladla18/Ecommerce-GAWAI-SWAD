@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     console.log(formData);
     axios
-      .post("http://localhost:3000/api/login", formData)
+      .post("https://ecommerce-gawai-swad.onrender.com/api/login", formData)
       .then((response) => {
         if (response.data.logger.usertype === "consumer") {
           localStorage.setItem("token", response.data.token);

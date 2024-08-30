@@ -13,7 +13,7 @@ const EmployeeCreation = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/adminsignup", formData)
+      .post("https://ecommerce-gawai-swad.onrender.com/api/adminsignup", formData)
       .then((response) => {
         navigate("/login");
          localStorage.removeItem("admintoken");

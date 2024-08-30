@@ -10,7 +10,7 @@ const SellerDashboard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/sellerdashboard",
+          "https://ecommerce-gawai-swad.onrender.com/api/sellerdashboard",
           {
             headers: {
               "Content-Type": "application/json",

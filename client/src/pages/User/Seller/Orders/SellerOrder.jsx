@@ -38,7 +38,7 @@ const navigate = useNavigate()
       if (sellerId) {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/sellerorders/${sellerId}`
+            `https://ecommerce-gawai-swad.onrender.com/api/sellerorders/${sellerId}`
           );
           setOrders(response.data.orders);
           setLoading(false);
@@ -86,7 +86,7 @@ const navigate = useNavigate()
                               <Row>
                                 <Col md={4}>
                                   <Card.Img
-                                    src={`http://localhost:3000/${op.productimage}`}
+                                    src={`https://ecommerce-gawai-swad.onrender.com/${op.productimage}`}
                                     alt={op.productname}
                                     style={{
                                       width: "100%",
@@ -136,7 +136,7 @@ const navigate = useNavigate()
                               <Row>
                                 <Col md={4}>
                                   <Card.Img
-                                    src={`http://localhost:3000/${sp.productImage}`}
+                                    src={`https://ecommerce-gawai-swad.onrender.com/${sp.productImage}`}
                                     alt={sp.productName}
                                     style={{
                                       width: "100%",

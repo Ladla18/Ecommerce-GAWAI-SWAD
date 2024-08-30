@@ -32,7 +32,7 @@ const WishList = () => {
       const fetchWishlist = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:3000/api/fetchwishlist/${consumerId}`
+            `https://ecommerce-gawai-swad.onrender.com/api/fetchwishlist/${consumerId}`
           );
           setWishList(response.data.consumer.wishlist);
           console.log(response.data.consumer.wishlist);
@@ -47,7 +47,7 @@ const WishList = () => {
   const deleteWishlist = async (wid) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/deletewishlist/${wid}`
+        `https://ecommerce-gawai-swad.onrender.com/api/deletewishlist/${wid}`
       );
       setStatus(response.data.message);
 
@@ -104,7 +104,7 @@ const WishList = () => {
             />
             <div style={{ marginBottom: "10px" }}>
               <img
-                src={`http://localhost:3000/${w.productimage}`}
+                src={`https://ecommerce-gawai-swad.onrender.com/${w.productimage}`}
                 width="100%"
                 alt={w.productname}
                 style={{ borderRadius: "8px", cursor: "pointer" }}

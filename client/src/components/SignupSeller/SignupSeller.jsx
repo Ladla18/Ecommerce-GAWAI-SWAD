@@ -64,7 +64,7 @@ const SignupSeller = () => {
     setError("")
    }
    try{
-    axios.post("http://localhost:3000/api/sellersignup",formData)
+    axios.post("https://ecommerce-gawai-swad.onrender.com/api/sellersignup",formData)
     .then((response)=>{
         console.log(response.data);
         setStatus("Seller Signed Up Successfully . Please Login !" )
