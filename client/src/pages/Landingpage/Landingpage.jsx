@@ -89,12 +89,12 @@ const Landingpage = () => {
           <div className="col-ms-12 p-0" style={{ position: "relative" }}>
             <Carousel activeIndex={index} onSelect={handleSelect}>
               <Carousel.Item>
-                <Carouselmage image="public/catban-520240806115615.webp" />
+                <Carouselmage image="https://prod-img.thesouledstore.com/public/theSoul/uploads/themes/5722420240820130000.jpg?format=webp&w=1500&dpr=1.3" />
                 <Carousel.Caption></Carousel.Caption>
               </Carousel.Item>
 
               <Carousel.Item>
-                <Carouselmage image="public/5722420240820130000.webp" />
+                <Carouselmage image="https://prod-img.thesouledstore.com/public/theSoul/uploads/themes/8050620240827103427.jpg?format=webp&w=1500&dpr=1.3" />
                 <Carousel.Caption></Carousel.Caption>
               </Carousel.Item>
             </Carousel>
