@@ -15,6 +15,8 @@ const Landingpage = () => {
   const [seller, setSeller] = useState([]);
   const [consumerId, setConsumerId] = useState();
   const [status, setStatus] = useState();
+  const [loading,setLoading] = useState(true)
+  
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
@@ -38,7 +40,6 @@ const Landingpage = () => {
 
 
   console.log("consumer id", consumerId);
-
   useEffect(() => {
     if (status) {
       const timer = setTimeout(() => {
@@ -61,6 +62,7 @@ const Landingpage = () => {
         );
         console.log(allProducts);
         setProducts(allProducts);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -126,73 +128,79 @@ const Landingpage = () => {
           ) : (
             ""
           )}
-          <div className="row mt-5">
-            {seller.map((s) => (
-              <>
-                {s.sellerproducts.map((p) => (
-                  <div className="col-sm-3 mt-4" key={p._id}>
-                    <Card
-                      className="product-card"
-                      style={{ width: "18rem", height: "28rem" }}
-                    >
-                      <div
-                        className="p-0 m-0"
-                        style={{
-                          display: "inline",
-                          position: "absolute",
-                          left: "250px",
-                          top: "15px",
-                          cursor: "pointer",
-                        }}
+          {loading ? (
+            <div className="text-center mt-5">
+              <img src="public/infinite-spinner.svg" width="170px" alt="" />
+            </div>
+          ) : (
+            <div className="row mt-5">
+              {seller.map((s) => (
+                <>
+                  {s.sellerproducts.map((p) => (
+                    <div className="col-sm-3 mt-4" key={p._id}>
+                      <Card
+                        className="product-card"
+                        style={{ width: "18rem", height: "28rem" }}
                       >
-                        <img
-                          src="heart.png"
-                          alt=""
-                          width="30px"
-                          onClick={() => addToWishList(s._id, p._id)}
-                        />
-                      </div>
-                      <div style={{ height: "340px" }}>
-                        <Card.Img
-                          onClick={() => productDetail(s._id, p._id)}
-                          variant="top"
+                        <div
                           className="p-0 m-0"
                           style={{
+                            display: "inline",
+                            position: "absolute",
+                            left: "250px",
+                            top: "15px",
                             cursor: "pointer",
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            margin: "10px auto",
                           }}
-                          src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
-                          width="200px"
-                        />
-                      </div>
-                      <Card.Body
-                        className=""
-                        style={{ height: "10px", marginTop: "-10px" }}
-                      >
-                        <Card.Title
-                          className="p-0 m-0"
-                          style={{ fontSize: "16px" }}
                         >
-                          {p.productName}
-                        </Card.Title>
-                      </Card.Body>
-                      <ListGroup className="list-group-flush">
-                        <ListGroup.Item style={{ fontSize: "12px" }}>
-                          Category: {p.productCategory}
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                          Price : ₹{p.productPrice}
-                        </ListGroup.Item>
-                      </ListGroup>
-                    </Card>
-                  </div>
-                ))}
-              </>
-            ))}
-          </div>
+                          <img
+                            src="heart.png"
+                            alt=""
+                            width="30px"
+                            onClick={() => addToWishList(s._id, p._id)}
+                          />
+                        </div>
+                        <div style={{ height: "340px" }}>
+                          <Card.Img
+                            onClick={() => productDetail(s._id, p._id)}
+                            variant="top"
+                            className="p-0 m-0"
+                            style={{
+                              cursor: "pointer",
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                              margin: "10px auto",
+                            }}
+                            src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
+                            width="200px"
+                          />
+                        </div>
+                        <Card.Body
+                          className=""
+                          style={{ height: "10px", marginTop: "-10px" }}
+                        >
+                          <Card.Title
+                            className="p-0 m-0"
+                            style={{ fontSize: "16px" }}
+                          >
+                            {p.productName}
+                          </Card.Title>
+                        </Card.Body>
+                        <ListGroup className="list-group-flush">
+                          <ListGroup.Item style={{ fontSize: "12px" }}>
+                            Category: {p.productCategory}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                            Price : ₹{p.productPrice}
+                          </ListGroup.Item>
+                        </ListGroup>
+                      </Card>
+                    </div>
+                  ))}
+                </>
+              ))}
+            </div>
+          )}
         </div>
         <div className="row">
           <div className="col-sm-12"></div>

@@ -10,41 +10,46 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // State for loader visibility
 
   const inputHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    axios
-      .post("https://ecommerce-gawai-swad.onrender.com/api/login", formData)
-      .then((response) => {
-        if (response.data.logger.usertype === "consumer") {
-          localStorage.setItem("token", response.data.token);
-          navigate("/");
-        } else if (response.data.logger.usertype === "admin") {
-          localStorage.setItem("token", response.data.token);
-          navigate("/admindashboard");
-        } else if (response.data.logger.usertype === "seller") {
-          localStorage.setItem("token", response.data.token);
-          navigate("/sellerdashboard");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err) {
-          setError("Email or Password is incorrect");
-        }
-      });
+    setIsLoading(true); // Show loader before API call
+
+    try {
+      const response = await axios.post(
+        "https://ecommerce-gawai-swad.onrender.com/api/login",
+        formData
+      );
+
+      if (response.data.logger.usertype === "consumer") {
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
+      } else if (response.data.logger.usertype === "admin") {
+        localStorage.setItem("token", response.data.token);
+        navigate("/admindashboard");
+      } else if (response.data.logger.usertype === "seller") {
+        localStorage.setItem("token", response.data.token);
+        navigate("/sellerdashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Email or Password is incorrect");
+    } finally {
+      setIsLoading(false); // Hide loader after API call (or timeout)
+    }
   };
-  useEffect(()=>{
+
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      return navigate("/");
+      navigate("/");
     }
-  })
+  }, []); // Empty dependency array ensures it runs only on initial render
 
   return (
     <div className="container mt-5">
@@ -87,9 +92,17 @@ const Login = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary w-100">
-                  Login
-                </button>
+                <div className="text-center">
+                  {isLoading ? (
+                    <div className="loader">
+                      <img src="public/infinite-spinner.svg" width='70px' alt="" />
+                    </div>
+                  ) : (
+                    <button type="submit" className="btn btn-primary w-100">
+                      Login
+                    </button>
+                  )}
+                </div>
               </form>
             </div>
             <div className="card-footer text-center py-3">

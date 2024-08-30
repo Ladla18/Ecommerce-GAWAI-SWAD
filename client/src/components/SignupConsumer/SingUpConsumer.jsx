@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react';
-import './SignUp.css'; // Importing the CSS file for styling
-import axios from 'axios';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./SignUp.css"; // Importing the CSS file for styling
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const SignupConsumer = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +12,9 @@ const SignupConsumer = () => {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState('');
-  const [success,setSuccess] = useState('')
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false); // State for managing the loader
 
   const navigate = useNavigate();
 
@@ -21,15 +22,16 @@ const SignupConsumer = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
-   useEffect(() => {
-     const token = localStorage.getItem("token");
-     if (token) {
-       return navigate("/");
-     }
-   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,25 +39,31 @@ const SignupConsumer = () => {
       setError("Passwords do not match");
       return;
     }
-    console.log(formData)
+    setLoading(true); // Set loading to true when the form is submitted
     try {
       const response = await axios.post(
-        "https://ecommerce-gawai-swad.onrender.com/api/consumersignup",  {
+        "https://ecommerce-gawai-swad.onrender.com/api/consumersignup",
+        {
           consumername: formData.consumername,
           consumeremail: formData.consumeremail,
-          consumerpassword: formData.consumerpassword
-        }    );
+          consumerpassword: formData.consumerpassword,
+        }
+      );
       setSuccess(response.data.message);
-      setError('');
-      
+      setError("");
+      setLoading(false); // Stop loading on success
     } catch (error) {
-      console.error('There was an error sending the data!', error);
+      console.error("There was an error sending the data!", error);
       if (error.response) {
-        setError(error.response.data.message || 'There was an error processing your request');
+        setError(
+          error.response.data.message ||
+            "There was an error processing your request"
+        );
       } else {
-        setError('Network error or other issue');
+        setError("Network error or other issue");
       }
-      setSuccess('');
+      setSuccess("");
+      setLoading(false); // Stop loading on error
     }
   };
 
@@ -77,6 +85,7 @@ const SignupConsumer = () => {
                 value={formData.consumername}
                 onChange={handleChange}
                 required
+                disabled={loading} // Disable input during loading
               />
             </div>
             <div className="form-group">
@@ -88,6 +97,7 @@ const SignupConsumer = () => {
                 value={formData.consumeremail}
                 onChange={handleChange}
                 required
+                disabled={loading} // Disable input during loading
               />
             </div>
             <div className="form-group">
@@ -99,6 +109,7 @@ const SignupConsumer = () => {
                 value={formData.consumerpassword}
                 onChange={handleChange}
                 required
+                disabled={loading} // Disable input during loading
               />
             </div>
             <div className="form-group">
@@ -110,10 +121,12 @@ const SignupConsumer = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
+                disabled={loading} // Disable input during loading
               />
             </div>
-            <button type="submit" className="signup-button">
-              Sign Up
+            <button type="submit" className="signup-button" disabled={loading}>
+              {loading ? <img src="public/infinite-spinner.svg" width='70px' alt="" /> : "Sign Up"}{" "}
+              {/* Show loader text during loading */}
             </button>
           </form>
           <div className="signin-link">
@@ -123,7 +136,7 @@ const SignupConsumer = () => {
             </Link>
           </div>
           <div className="text-center mt-4">
-            <button className="btn btn-danger ">Signup Using Google</button>
+            <button className="btn btn-danger">Signup Using Google</button>
           </div>
         </div>
       </div>
