@@ -80,14 +80,14 @@ const Ticket = () => {
           );
           setTicketData(response.data);
           // console.log(response.data);
-        } catch (Er) {
+        } catch (Er) { 
           console.log(Er);
         }
       };
       if (consumerId) {
         fetchTickets();
       }
-    }, [consumerId,submitHandle]);
+    }, [consumerId]);
 
   const handleViewClick = (ticket) => {
     setSelectedTicket(ticket);

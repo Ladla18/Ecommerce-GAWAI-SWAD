@@ -19,7 +19,7 @@ module.exports.raiseTicket = async (req, res) => {
   const savedTicket = await newTicket.save();
   const sellerdata = await Seller.findById(id);
   console.log(sellerdata);
-  if (sellerdata.usertype == "seller") {
+  if (sellerdata && sellerdata.usertype == "seller") {
     const sellerTic = await Seller.findByIdAndUpdate(
       id,
       {
@@ -41,16 +41,16 @@ module.exports.raiseTicket = async (req, res) => {
   );
 };
 module.exports.fetchTickets = async (req, res) => {
-  const id = req.params.id;
   console.log("fetch called");
+  const id = req.params.id;
 
   try {
     const seller =await  Seller.findById(id);
-    console.log(seller)
-    if (seller.usertype == "seller") {
+    
+    if (seller && seller.usertype == "seller") {
       const sellertickets = await Seller.findById(id).populate("tickets");
       console.log(sellertickets)
-      res.json(sellertickets.tickets);
+      res.json(sellertickets.tickets); 
     }
   else{
       const consumerticket = await Consumer.findById(id).populate("tickets");
