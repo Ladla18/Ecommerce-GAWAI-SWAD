@@ -95,7 +95,11 @@ const Login = () => {
                 <div className="text-center">
                   {isLoading ? (
                     <div className="loader">
-                      <img src="public/infinite-spinner.svg" width='70px' alt="" />
+                      <img
+                        src="Animation - 1725024782997.gif"
+                        width="90px"
+                        alt=""
+                      />
                     </div>
                   ) : (
                     <button type="submit" className="btn btn-primary w-100">

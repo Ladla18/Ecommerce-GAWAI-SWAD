@@ -228,19 +228,19 @@ module.exports.sendEmail = async (req, res) => {
     return res.status(400).json({ message: "Email is required" });
   }
 
-  // pass: "viqv ypjd sfkg bifw",
+  // pass: "",
   // Set up Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "Gmail", // e.g., Gmail, Outlook
     auth: {
-      user: "purusoftprosoftpro@gmail.com",
-      pass: "zuzq twqd pznk ahqt",
+      user: "bsoft0727@gmail.com",
+      pass: "viqv ypjd sfkg bifw",
     },
   });
 
   // Email options
   const mailOptions = {
-    from: "purusoftprosoftpro@gmail.com",
+    from: "bsoft0727@gmail.com",
     to: email,
     subject: "Shopping",
     text: `Thank you for Ordering ${productname} of ${productprice} from ${seller}`,
