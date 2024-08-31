@@ -141,6 +141,13 @@ const SpecificProduct = () => {
             Category: {product.productCategory}
           </h6>
           <h5 className="product-seller">Seller: {seller.sellername}</h5>
+          <h5 className="product-seller">
+            Sizes:{" "}
+            {product.sizes &&
+              product.sizes.map((element, index) => (
+                <span key={index}> {element}  </span>
+              ))}
+          </h5>
           <p className="product-description">
             <span className="fw-bold">Description</span> -{" "}
             {product.productDescription}

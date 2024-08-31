@@ -52,7 +52,11 @@ const sellerSchema = new Schema({
       ref: "Ticket",
 
     }
-  ]
+  ],
+  isBanned:{
+    type:Boolean,
+    default:false
+  }
 });
 
 const addProductSchema = new Schema({

@@ -30,6 +30,8 @@ import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import AllUser from "./pages/Admin/Allusers/AllUser";
 import Footer from "./components/Footer/Footer";
+import ConsumerTicketDetails from "./pages/Admin/AdminDashboard/ConsumerTicketDetails";
+import SellerTicketDetails from "./pages/Admin/AdminDashboard/SellerTicketDetails";
 function App() {
 
   return (
@@ -39,8 +41,12 @@ function App() {
         <Routes>
           {/* Unauthorized */}
           <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="*" element={<div className="display-1 text-center mt-5">Page Not Found</div>}/>
-
+          <Route
+            path="*"
+            element={
+              <div className="display-1 text-center mt-5">Page Not Found</div>
+            }
+          />
 
           {/* Consumer */}
           <Route path="/" element={<Landingpage />} />
@@ -56,14 +62,14 @@ function App() {
           />
           <Route path="/yourorders" element={<YourOrders />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<WishList/>}/>
-          <Route path="/ticketdashboard" element={<Ticket/>} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="/ticketdashboard" element={<Ticket />} />
           {/* Seller */}
           <Route path="/sellersignup" element={<SignupSeller />} />
           <Route path="/sellerdashboard" element={<SellerDashboard />} />
           <Route path="/seller/addproduct" element={<Addproducts />} />
           <Route path="/seller/viewproducts" element={<ProductList />} />
-          <Route path="/seller/orders" element={<SellerOrder/>} />
+          <Route path="/seller/orders" element={<SellerOrder />} />
           <Route path="/updateproductdetails/:id" element={<ModifyProduct />} />
 
           {/* Admin */}
@@ -71,8 +77,16 @@ function App() {
           <Route path="/verify" element={<AdminVerification />} />
           <Route path="/admin/allusers" element={<AllUser />} />
           <Route path="/employeecreation" element={<EmployeeCreation />} />
+          <Route
+            path="/consumerticketdetail/:id/:tid"
+            element={<ConsumerTicketDetails />}
+          />
+          <Route
+            path="/sellerticketdetail/:id/:tid"
+            element={<SellerTicketDetails />}
+          />
         </Routes>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

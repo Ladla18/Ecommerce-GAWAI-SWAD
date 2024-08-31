@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 const { json } = require("body-parser");
 
 module.exports.consumerSignUp = async (req, res) => {
+  console.log("Signup called")
   const { consumername, consumeremail, consumerpassword } = req.body;
   try {
     const existingEmail = await Consumer.findOne({ consumeremail });

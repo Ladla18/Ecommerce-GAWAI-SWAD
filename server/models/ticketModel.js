@@ -21,6 +21,14 @@ const ticketObject = new Schema({
         type:Boolean,
         default:false
 
+    },
+    userkind:{
+        type:String,
+        default:"na"
+        
+    },
+    userid:{
+        type:String,
     }
 })
 const Ticket = mongoose.model("Ticket",ticketObject)

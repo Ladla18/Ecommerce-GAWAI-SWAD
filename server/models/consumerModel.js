@@ -43,6 +43,11 @@ const consumerSchema = new Schema({
       ref:'Ticket'
     }
   ]
+  ,
+  isBanned:{
+    type:Boolean,
+    default:false
+  }
 });
 
 const cartItemSchema = new Schema({

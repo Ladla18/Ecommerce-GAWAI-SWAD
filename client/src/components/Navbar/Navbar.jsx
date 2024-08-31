@@ -96,9 +96,7 @@ const Header = () => {
                 <Nav.Link as={Link} to="/admindashboard">
                   Dashboard
                 </Nav.Link>
-                <Nav.Link as={Link} to="/admin/reports">
-                  See Reports
-                </Nav.Link>
+               
               </Nav>
             ) : isLoggedIn && userType === "seller" ? (
               <Nav className="me-auto">
