@@ -46,6 +46,13 @@ const sellerSchema = new Schema({
       ref: "Orders",
     },
   ],
+  tickets:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Ticket",
+
+    }
+  ]
 });
 
 const addProductSchema = new Schema({
