@@ -130,7 +130,7 @@ const Landingpage = () => {
           )}
           {loading ? (
             <div className="text-center mt-5">
-              <img src="public/infinite-spinner.svg" width="170px" alt="" />
+              <img src="infinite-spinner.svg" width="170px" alt="" />
             </div>
           ) : (
             <div className="row mt-5">
@@ -205,7 +205,7 @@ const Landingpage = () => {
         <div className="row">
           <div className="col-sm-12"></div>
         </div>
-        <Footer />
+     
       </div>
     </>
   );

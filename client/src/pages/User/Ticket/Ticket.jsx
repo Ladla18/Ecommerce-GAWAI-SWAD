@@ -25,6 +25,7 @@ const Ticket = () => {
   const [ticketData, setTicketData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(null);
+  
 
   const checkLoginStatus = () => {
     const token = localStorage.getItem("token");
@@ -45,22 +46,7 @@ const Ticket = () => {
   
    
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const response = await axios.get(
-          `https://ecommerce-gawai-swad.onrender.com/api/fetchticket/${consumerId}`
-        );
-        setTicketData(response.data);
-        console.log(response.data);
-      } catch (Er) {
-        console.log(Er);
-      }
-    };
-    if (consumerId) {
-      fetchTickets();
-    }
-  }, [consumerId]);
+
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -86,6 +72,22 @@ const Ticket = () => {
     };
     raiseTicket();
   };
+    useEffect(() => {
+      const fetchTickets = async () => {
+        try {
+          const response = await axios.get(
+            `https://ecommerce-gawai-swad.onrender.com/api/fetchticket/${consumerId}`
+          );
+          setTicketData(response.data);
+          // console.log(response.data);
+        } catch (Er) {
+          console.log(Er);
+        }
+      };
+      if (consumerId) {
+        fetchTickets();
+      }
+    }, [consumerId,submitHandle]);
 
   const handleViewClick = (ticket) => {
     setSelectedTicket(ticket);

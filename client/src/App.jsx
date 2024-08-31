@@ -29,6 +29,7 @@ import SellerOrder from "./pages/User/Seller/Orders/SellerOrder";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import AllUser from "./pages/Admin/Allusers/AllUser";
+import Footer from "./components/Footer/Footer";
 function App() {
 
   return (
@@ -71,6 +72,7 @@ function App() {
           <Route path="/admin/allusers" element={<AllUser />} />
           <Route path="/employeecreation" element={<EmployeeCreation />} />
         </Routes>
+        <Footer/>
       </div>
     </>
   );
