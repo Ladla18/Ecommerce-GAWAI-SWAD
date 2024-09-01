@@ -121,6 +121,8 @@ const wishListSchema = new Schema({
     type: String,
   },
 });
+
+
 const Consumer = mongoose.model("Consumer", consumerSchema);
 const CartItems = mongoose.model("CartItems", cartItemSchema);
 const Orders = mongoose.model("Orders", orderSchema);

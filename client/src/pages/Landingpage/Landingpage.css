@@ -1,9 +1,18 @@
 .product-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 18rem;
+  height: 28rem;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 600px) {
+  .product-card {
+    width: 13rem;
+    height: 25rem;
+  }
 }

@@ -69,7 +69,7 @@ useEffect(() => {
                       objectFit: "cover",
                       margin: "10px auto",
                     }}
-                    src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
+                    src={`${p.productImage}`}
                     width="200px"
                   />
                   <Card.Body>

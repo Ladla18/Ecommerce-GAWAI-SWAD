@@ -116,21 +116,31 @@ const Landingpage = () => {
   return (
     <>
       {/* Modal */}
-      <Modal show={showModal} style={{padding:"100px"}} onHide={() => setShowModal(false)} centered>
+      <Modal
+        show={showModal}
+        style={{ padding: "100px" }}
+        onHide={() => setShowModal(false)}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title className="text-center">Snazzy Touch</Modal.Title>
         </Modal.Header>
         <Modal.Body className="py-5 h2">
           This Web Application was built by{" "}
           <span className="text-primary fw-bold">Amanullah Ansari</span> during
-          an internship at <span className="fw-bold" style={{color:"tomato"}}>Softpro India.</span>
+          an internship at{" "}
+          <span className="fw-bold" style={{ color: "tomato" }}>
+            Softpro India.
+          </span>
         </Modal.Body>
-       
       </Modal>
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-ms-12 p-0" style={{ position: "relative" }}>
+      <div className="container-fluid p-0">
+        <div className="row ">
+          <div
+            className="col-ms-12 p-0 d-none d-sm-block"
+            style={{ position: "relative" }}
+          >
             <Carousel activeIndex={index} onSelect={handleSelect}>
               <Carousel.Item>
                 <Carouselmage image="https://prod-img.thesouledstore.com/public/theSoul/uploads/themes/5722420240820130000.jpg?format=webp&w=1500&dpr=1.3" />
@@ -174,10 +184,10 @@ const Landingpage = () => {
           ) : (
             <div className="row mt-5">
               {displayProducts.map((p) => (
-                <div className="col-sm-3 mt-4" key={p._id}>
+                <div className="col-sm-3 col-6 mt-4" key={p._id}>
                   <Card
-                    className="product-card"
-                    style={{ width: "18rem", height: "28rem" }}
+                    className="product-card "
+                   
                   >
                     <div
                       className="p-0 m-0"

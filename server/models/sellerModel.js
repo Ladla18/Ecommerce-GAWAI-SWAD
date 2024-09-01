@@ -92,6 +92,12 @@ const addProductSchema = new Schema({
 
     default: [],
   },
+  reviews:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    }
+  ]
 });
 
 // Create the model using the schema

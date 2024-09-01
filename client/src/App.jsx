@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <div className="container-fluid p-0">
+      <div className="container-fluid  ">
         <Header />
         <Routes>
           {/* Unauthorized */}

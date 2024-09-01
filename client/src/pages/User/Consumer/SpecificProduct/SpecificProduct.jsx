@@ -12,17 +12,19 @@ const SpecificProduct = () => {
   const [consumerId, setConsumerId] = useState();
   const [consumerEmail, setConsumerEmail] = useState();
   const [cartMsg, setCartMsg] = useState();
- 
-  
-  useEffect(() => {
-      if (cartMsg) {
-        const timer = setTimeout(() => {
-          setCartMsg(""); // Clear the status message after 3 seconds
-        }, 3000);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+  const [productReview,setProductReview] = useState([])
 
-        // Clean up the timer when the component unmounts or status changes
-        return () => clearTimeout(timer);
-      }
+  useEffect(() => {
+    if (cartMsg) {
+      const timer = setTimeout(() => {
+        setCartMsg(""); // Clear the status message after 3 seconds
+      }, 3000);
+
+      // Clean up the timer when the component unmounts or status changes
+      return () => clearTimeout(timer);
+    }
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -52,6 +54,18 @@ const SpecificProduct = () => {
       }
     };
     fetchProduct();
+    const fetchReview = async () => {
+      try {
+        const response = await axios.get(
+          `https://ecommerce-gawai-swad.onrender.com/api/getreview/${pid}`
+        );
+        setProductReview(response.data)
+        console.log(response.data)
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchReview()
   }, [cartMsg]);
 
   const addtocart = async () => {
@@ -72,25 +86,52 @@ const SpecificProduct = () => {
       console.log(err);
     }
   };
+
   const sendEmail = async () => {
     try {
-       const response2 = await axios.post(
-         `https://ecommerce-gawai-swad.onrender.com/api/placesingleorder/${consumerId}/${sid}`,
-         product
-       ); // Assuming you are sending the item data with the request
-       setCartMsg(response2.data.msg);
-       let response = await axios.post("https://ecommerce-gawai-swad.onrender.com/api/sendemail", {
-         email: consumerEmail,
-         productname: product.productName,
-         productprice: product.productPrice,
-         seller: seller.sellername,
-         image:product.productImage
-       });
-      
-       console.log(response2.data);
-     
-     
+      const response2 = await axios.post(
+        `https://ecommerce-gawai-swad.onrender.com/api/placesingleorder/${consumerId}/${sid}`,
+        product
+      ); // Assuming you are sending the item data with the request
+      setCartMsg(response2.data.msg);
+      let response = await axios.post(
+        "https://ecommerce-gawai-swad.onrender.com/api/sendemail",
+        {
+          email: consumerEmail,
+          productname: product.productName,
+          productprice: product.productPrice,
+          seller: seller.sellername,
+          image: product.productImage,
+        }
+      );
 
+      console.log(response2.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRatingChange = (value) => {
+    setRating(value);
+  };
+
+  const handleReviewChange = (e) => {
+    setReview(e.target.value);
+  };
+
+  const submitReview = async () => {
+    try {
+      await axios.post(
+        `https://ecommerce-gawai-swad.onrender.com/api/submitreview/${pid}`,
+        {
+          consumerId,
+          rating,
+          review,
+        }
+      );
+      setReview("");
+      setRating(0);
+      setCartMsg("Thank You For Your Review");
     } catch (err) {
       console.log(err);
     }
@@ -145,13 +186,79 @@ const SpecificProduct = () => {
             Sizes:{" "}
             {product.sizes &&
               product.sizes.map((element, index) => (
-                <span key={index}> {element}  </span>
+                <span key={index}> {element} </span>
               ))}
           </h5>
           <p className="product-description">
             <span className="fw-bold">Description</span> -{" "}
             {product.productDescription}
           </p>
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="rating" style={{ fontSize: "1.5rem" }}>
+                <h2 className="d-inline">Rate Product </h2>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span
+                    key={star}
+                    onClick={() => handleRatingChange(star)}
+                    style={{
+                      cursor: "pointer",
+                      color: rating >= star ? "#FFD700" : "#e4e5e9",
+                      fontSize: "50px",
+                    }}
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+              <div className="form-group mt-3">
+                <textarea
+                  className="form-control"
+                  rows="3"
+                  placeholder="Write your review..."
+                  value={review}
+                  onChange={handleReviewChange}
+                  style={{ borderColor: "#ced4da" }}
+                ></textarea>
+                <>
+                  {consumerId ? (
+                    <button
+                      className="btn btn-primary mt-2"
+                      onClick={submitReview}
+                    >
+                      Submit Review
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-danger mt-2"
+                     
+                    >
+                      Login Required
+                    </button>
+                  )}
+                </>
+              </div>
+              <div className="row mt-5">
+                <h4>Review & Reviews</h4>
+                {productReview.map((pr) => (
+                  <div className="col-sm-12 mt-2 border py-2" key={pr._id}>
+                    <span className="bg-success text-light p-1 rounded-1">
+                      {pr.rating}
+                      <span className="text-warning"> &#9733;</span> &nbsp;
+                      {pr.reviewText}
+                    </span>
+                    <p
+                      className="text-secondary mt-3"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {" "}
+                      {pr.consumerId.consumername} &#10004; Certified Buyer
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

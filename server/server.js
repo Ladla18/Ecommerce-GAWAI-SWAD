@@ -9,6 +9,7 @@ const sellerRoute = require("./routes/sellerRoute");
 const consumerRoute = require("./routes/consumerRoute");
 const adminRoute = require("./routes/adminRoute");
 const ticketRoute = require("./routes/ticketRoute")
+const reviewRoute = require("./routes/reviewRoute")
 const { AddProduct, Seller } = require("./models/sellerModel");
 const path = require("path");
 const authenticateToken = require("./middlewares/authenticateToken");
@@ -33,6 +34,7 @@ app.use("/api", upload.single("productImage"), sellerRoute);
 app.use("/api", consumerRoute);
 app.use("/api", adminRoute);
 app.use("/api", ticketRoute);
+app.use("/api",reviewRoute)
 
 app.get("/api/viewproducts", authenticateToken, async (req, res) => {
   try {

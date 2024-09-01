@@ -143,7 +143,7 @@ const navigate = useNavigate()
                         textAlign: "center",
                       }}
                     >
-                      Order Date: {order.orderdate}
+                      Order Date: {order.orderdate.slice(0,10)}
                     </div>
                     <table
                       style={{
@@ -228,7 +228,7 @@ const navigate = useNavigate()
                         textAlign: "center",
                       }}
                     >
-                      Order Date: {so.orderdate}
+                      Order Date: {so.orderdate.slice(0,10)}
                     </div>
                     <table
                       style={{

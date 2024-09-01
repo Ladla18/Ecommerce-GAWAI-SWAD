@@ -87,166 +87,177 @@ const Header = () => {
       className="container-fluid p-0 position-sticky top-0 start-0 end-0"
       style={{ zIndex: "10" }}
     >
-      <Navbar bg="dark" expand="lg" className="p-3" data-bs-theme="dark">
-        <Container>
-          {/* Brand Link */}
-          {isLoggedIn && userType === "consumer" ? (
-            <Navbar.Brand as={Link} to="/">
-              SnazzyTouch
-            </Navbar.Brand>
-          ) : (
-            <Navbar.Brand as={Link}>SnazzyTouch</Navbar.Brand>
-          )}
-
-          {/* Toggle for smaller screens */}
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-
-          <Navbar.Collapse id="responsive-navbar-nav">
-            {/* Conditional Links Based on User Type */}
-            {isLoggedIn && userType === "admin" ? (
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/admindashboard">
-                  Dashboard
-                </Nav.Link>
-              </Nav>
-            ) : isLoggedIn && userType === "seller" ? (
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/sellerdashboard">
-                  Dashboard
-                </Nav.Link>
-                <Nav.Link as={Link} to="/seller/addproduct">
-                  Add Products
-                </Nav.Link>
-                <Nav.Link as={Link} to="/seller/viewproducts">
-                  View Your Products
-                </Nav.Link>
-                <Nav.Link as={Link} to="/seller/orders">
-                  View Orders
-                </Nav.Link>
-              </Nav>
-            ) : isLoggedIn && userType === "consumer" ? (
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/">
-                  Home
-                </Nav.Link>
-                <Nav.Link as={Link} to="/men">
-                  Men
-                </Nav.Link>
-                <Nav.Link as={Link} to="/women">
-                  Women
-                </Nav.Link>
-                <Nav.Link as={Link} to="/kids">
-                  Kids
-                </Nav.Link>
-                <div>
-                  <form
-                    action="" method="get"
-                    onSubmit={handleSearchButton}
-                    className="d-flex"
-                  >
-                    <div className="ms-4">
-                      <input
-                        type="text"
-                        placeholder="Search Our Products"
-                        name="searchBar"
-                        onChange={handleSearchProduct}
-                        value={searchData.searchBar}
-                        className="form-control"
-                        id=""
-                      />
-                    </div>
-                    <div>
-                      <button type="submit" className="btn btn-outline-warning ms-2">
-                        Search
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </Nav>
-            ) : (
-              <Nav className="me-auto">
-                <Nav.Link as={Link} to="/">
-                  Home
-                </Nav.Link>
-              </Nav>
-            )}
-
-            {/* Right Side Links */}
-            <Nav className="ms-auto">
-              {isLoggedIn ? (
-                <>
-                  <ConsumerNeed
-                    userDetail={
-                      userDetail.consumername ||
-                      userDetail.sellername ||
-                      userDetail.adminemail
-                    }
-                    logout={logout}
-                  />
-                  <span className="text-light" style={{ marginTop: "12px" }}>
-                    {}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Nav.Link as={Link} to="/sellersignup">
-                    Become A Seller
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/consumersignup">
-                    SignUp
-                  </Nav.Link>
-                  <Nav.Link as={Link} to="/login">
-                    Login
-                  </Nav.Link>
-                </>
-              )}
-            </Nav>
-
-            {/* Cart Icon and Status */}
-            <Nav className="mt-lg-0 mt-3">
+      <div className="row">
+        <div className="col-sm-12 p-0">
+          <Navbar bg="dark" expand="lg" className="p-3" data-bs-theme="dark">
+            <Container>
+              {/* Brand Link */}
               {isLoggedIn && userType === "consumer" ? (
-                <Link id="cart" to="/cart">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/128/1170/1170576.png"
-                    width="30px"
-                    alt="Cart"
-                  />
-                  {cartItems.length > 0 ? (
-                    <div
-                      className="bg-warning px-2 rounded-2"
-                      style={{
-                        position: "absolute",
-                        color: "black",
-                        top: "-15px",
-                        left: "24px",
-                      }}
-                      id="cart-status"
-                    >
-                      {cartItems.filter((item) => !item.isOrdered).length}
-                    </div>
-                  ) : (
-                    <div
-                      id="cart-status"
-                      style={{
-                        position: "absolute",
-                        height: "5px",
-                        width: "5px",
-                        borderRadius: "50%",
-                        backgroundColor: "red",
-                        top: "-2px",
-                        left: "20px",
-                      }}
-                    ></div>
-                  )}
-                </Link>
+                <Navbar.Brand as={Link} to="/">
+                  SnazzyTouch
+                </Navbar.Brand>
               ) : (
-                ""
+                <Navbar.Brand as={Link}>SnazzyTouch</Navbar.Brand>
               )}
-            </Nav>
-            <CustomerSupport />
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+
+              {/* Toggle for smaller screens */}
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+              <Navbar.Collapse id="responsive-navbar-nav">
+                {/* Conditional Links Based on User Type */}
+                {isLoggedIn && userType === "admin" ? (
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/admindashboard">
+                      Dashboard
+                    </Nav.Link>
+                  </Nav>
+                ) : isLoggedIn && userType === "seller" ? (
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/sellerdashboard">
+                      Dashboard
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/seller/addproduct">
+                      Add Products
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/seller/viewproducts">
+                      View Your Products
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/seller/orders">
+                      View Orders
+                    </Nav.Link>
+                  </Nav>
+                ) : isLoggedIn && userType === "consumer" ? (
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/">
+                      Home
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/men">
+                      Men
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/women">
+                      Women
+                    </Nav.Link>
+                    <Nav.Link as={Link} to="/kids">
+                      Kids
+                    </Nav.Link>
+                    <div>
+                      <form
+                        action=""
+                        method="get"
+                        onSubmit={handleSearchButton}
+                        className="d-flex"
+                      >
+                        <div className="ms-sm-4">
+                          <input
+                            type="text"
+                            placeholder="Search Our Products"
+                            name="searchBar"
+                            onChange={handleSearchProduct}
+                            value={searchData.searchBar}
+                            className="form-control"
+                            id=""
+                          />
+                        </div>
+                        <div>
+                          <button
+                            type="submit"
+                            className="btn btn-outline-warning ms-2"
+                          >
+                            Search
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </Nav>
+                ) : (
+                  <Nav className="me-auto">
+                    <Nav.Link as={Link} to="/">
+                      Home
+                    </Nav.Link>
+                  </Nav>
+                )}
+
+                {/* Right Side Links */}
+                <Nav className="ms-auto">
+                  {isLoggedIn ? (
+                    <>
+                      <ConsumerNeed
+                        userDetail={
+                          userDetail.consumername ||
+                          userDetail.sellername ||
+                          userDetail.adminemail
+                        }
+                        logout={logout}
+                      />
+                      <span
+                        className="text-light"
+                        style={{ marginTop: "12px" }}
+                      >
+                        {}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <Nav.Link as={Link} to="/sellersignup">
+                        Become A Seller
+                      </Nav.Link>
+                      <Nav.Link as={Link} to="/consumersignup">
+                        SignUp
+                      </Nav.Link>
+                      <Nav.Link as={Link} to="/login">
+                        Login
+                      </Nav.Link>
+                    </>
+                  )}
+                </Nav>
+
+                {/* Cart Icon and Status */}
+                <Nav className="mt-lg-0 mt-3">
+                  {isLoggedIn && userType === "consumer" ? (
+                    <Link id="cart" to="/cart">
+                      <img
+                        src="https://cdn-icons-png.flaticon.com/128/1170/1170576.png"
+                        width="30px"
+                        alt="Cart"
+                      />
+                      {cartItems.length > 0 ? (
+                        <div
+                          className="bg-warning px-2 rounded-2"
+                          style={{
+                            position: "absolute",
+                            color: "black",
+                            top: "-15px",
+                            left: "24px",
+                          }}
+                          id="cart-status"
+                        >
+                          {cartItems.filter((item) => !item.isOrdered).length}
+                        </div>
+                      ) : (
+                        <div
+                          id="cart-status"
+                          style={{
+                            position: "absolute",
+                            height: "5px",
+                            width: "5px",
+                            borderRadius: "50%",
+                            backgroundColor: "red",
+                            top: "-2px",
+                            left: "20px",
+                          }}
+                        ></div>
+                      )}
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                </Nav>
+                <CustomerSupport />
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        </div>
+      </div>
     </div>
   );
 };
