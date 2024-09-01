@@ -17,7 +17,7 @@ const Footer = () => {
                   make shopping easy and enjoyable for everyone.
                 </p>
               </Col>
-              <Col md={4}>
+              <Col md={4} className="text-center">
                 <h5>Quick Links</h5>
                 <ul className="list-unstyled">
                   <li>
@@ -42,7 +42,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </Col>
-              <Col md={4}>
+              <Col md={4} className="text-center">
                 <h5>Follow Us</h5>
                 <div>
                   <a href="#" className="text-white me-2">
@@ -63,7 +63,7 @@ const Footer = () => {
             <Row className="mt-3">
               <Col className="text-center">
                 <p>
-                  &copy; {new Date().getFullYear()} Your E-Commerce Website. All
+                  &copy; {new Date().getFullYear()} Snazzy Touch. All
                   Rights Reserved.
                 </p>
               </Col>

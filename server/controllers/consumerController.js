@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 const { json } = require("body-parser");
 
 module.exports.consumerSignUp = async (req, res) => {
-  console.log("Signup called")
+  console.log("Signup called");
   const { consumername, consumeremail, consumerpassword } = req.body;
   try {
     const existingEmail = await Consumer.findOne({ consumeremail });
@@ -26,7 +26,9 @@ module.exports.consumerSignUp = async (req, res) => {
         consumerpassword: hashpassword,
       });
 
-      return res.status(201).json({ message: "Consumer created successfully", data: consumer });
+      return res
+        .status(201)
+        .json({ message: "Consumer created successfully", data: consumer });
     }
   } catch (err) {
     res.status(500).json({ message: "Error creating consumer", error: err });
@@ -390,7 +392,7 @@ module.exports.getYourOrders = async (req, res) => {
   console.log("Your Order is called");
   const uid = req.params.uid;
 
-  // Check if uid is valid
+ 
   if (!mongoose.isValidObjectId(uid)) {
     console.error("Invalid ObjectId:", uid);
     return res.status(400).json({ error: "Invalid user ID" });
@@ -400,7 +402,7 @@ module.exports.getYourOrders = async (req, res) => {
     const consumer = await Consumer.findById(uid).populate({
       path: "orders",
       populate: {
-        path: "orderproduct", // Nested population
+        path: "orderproduct", 
         model: "CartItems",
       },
     });
@@ -410,7 +412,7 @@ module.exports.getYourOrders = async (req, res) => {
       return res.status(404).json({ error: "Consumer not found" });
     }
 
-    res.status(200).json(consumer); // Return the populated consumer object
+    res.status(200).json(consumer); 
   } catch (e) {
     console.error("Error fetching consumer orders:", e);
     res.status(500).json({ error: "Internal server error" });
@@ -423,14 +425,14 @@ module.exports.addToWishList = async (req, res) => {
   console.log("Consumer id =", cid);
 
   try {
-    // Find the seller and populate the products
+   
     const sdata = await Seller.findById(sid).populate("sellerproducts");
     if (!sdata) {
       console.log("Seller not found");
       return res.status(404).json({ message: "Seller not found" });
     }
 
-    // Find the product within the seller's products
+  
     const product = sdata.sellerproducts.find(
       (product) => product._id.toString() === pid
     );
@@ -440,21 +442,19 @@ module.exports.addToWishList = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // Find the consumer
     const consumer = await Consumer.findById(cid);
     if (!consumer) {
       console.log("Consumer not found");
       return res.status(404).json({ message: "Consumer not found" });
     }
 
-    // Check if the product is already in the consumer's wishlist
     const productInWishlist = await WishList.findOne({
       _id: { $in: consumer.wishlist },
       productname: product.productName,
     });
 
     if (productInWishlist) {
-      // If product exists in wishlist, remove it
+      
       await WishList.findByIdAndDelete(productInWishlist._id);
       await Consumer.findByIdAndUpdate(
         cid,
@@ -464,7 +464,7 @@ module.exports.addToWishList = async (req, res) => {
       console.log("Product removed from wishlist");
       return res.status(200).json({ message: "Product removed from wishlist" });
     } else {
-      // If product does not exist in wishlist, add it
+   
       const wishlist = new WishList({
         productid: product._id,
         productname: product.productName,
@@ -508,8 +508,6 @@ module.exports.deleteWishlistItems = async (req, res) => {
   }
 };
 
-
-
 module.exports.searchProduct = async (req, res) => {
   console.log("Search product called");
   const query = req.query.query;
@@ -519,26 +517,17 @@ module.exports.searchProduct = async (req, res) => {
   }
 
   try {
-    // Split the query into individual words
-    const words = query.split(/\s+/); // Split by spaces
-
-    // Create an array of regular expressions for each word
+    const words = query.split(/\s+/); 
     const regexArray = words.map((word) => new RegExp(word, "i"));
 
     console.log("Search Regex Array:", regexArray);
 
-    // Create an array of search conditions for each field
     const searchConditions = regexArray.map((regex) => ({
-      $or: [
-        { productName: regex },
-        
-        // Add other fields as needed
-      ],
+      $or: [{ productName: regex }],
     }));
 
     console.log("Search Conditions:", searchConditions);
 
-    // Combine all search conditions with $or
     const products = await AddProduct.find({
       $or: searchConditions,
     });
