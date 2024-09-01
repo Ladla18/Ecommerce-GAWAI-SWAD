@@ -104,7 +104,7 @@ const WishList = () => {
             />
             <div style={{ marginBottom: "10px" }}>
               <img
-                src={`https://ecommerce-gawai-swad.onrender.com/${w.productimage}`}
+                src={`${w.productimage}`}
                 width="100%"
                 alt={w.productname}
                 style={{ borderRadius: "8px", cursor: "pointer" }}

@@ -86,7 +86,7 @@ const navigate = useNavigate()
                               <Row>
                                 <Col md={4}>
                                   <Card.Img
-                                    src={`https://ecommerce-gawai-swad.onrender.com/${op.productimage}`}
+                                    src={`${op.productimage}`}
                                     alt={op.productname}
                                     style={{
                                       width: "100%",
@@ -136,7 +136,7 @@ const navigate = useNavigate()
                               <Row>
                                 <Col md={4}>
                                   <Card.Img
-                                    src={`https://ecommerce-gawai-swad.onrender.com/${sp.productImage}`}
+                                    src={`${sp.productImage}`}
                                     alt={sp.productName}
                                     style={{
                                       width: "100%",

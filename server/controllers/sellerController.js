@@ -3,6 +3,7 @@ const {Consumer,CartItems} = require("../models/consumerModel");
 const Admin = require("../models/adminModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
+const cloudinary = require("cloudinary").v2;
 module.exports.sellerSignUp = async (req, res) => {
   const {
     sellercompanyname,
@@ -98,7 +99,18 @@ module.exports.sellerDashboard = async(req,res)=>{
    }
 }
 
-module.exports.addProducts =  async (req, res) => {
+cloudinary.config({
+  cloud_name: "dpi4fpxqm",
+  api_key: "277238879239755",
+  api_secret: "KYq35pYaCe3e-5U0e_kG-0Z78uM",
+  secure: true,
+});
+
+
+
+
+module.exports.addProducts = async (req, res) => {
+  console.log("add prodcut called")
   try {
     const {
       productName,
@@ -107,20 +119,30 @@ module.exports.addProducts =  async (req, res) => {
       productPrice,
       sizes,
     } = req.body;
-    console.log(req.file)
-    const productImage = req.file.path;
-  
+
+    // Check if a file was uploaded
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    // Upload the image to Cloudinary
+    const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+    const productImage = cloudinaryResult.secure_url; // URL of the image in Cloudinary
+
+    // Create a new product with the Cloudinary image URL
     const newProduct = new AddProduct({
-      sellerid:req.authData.user._id,
+      sellerid: req.authData.user._id,
       productName,
       productDescription,
       productCategory,
       productPrice,
-   productImage,
+      productImage, // Use the Cloudinary URL
       sizes,
     });
     await newProduct.save();
-    const sellerproducts = await Seller.findByIdAndUpdate(
+
+    // Update the seller's product list
+    await Seller.findByIdAndUpdate(
       req.authData.user._id,
       {
         $push: {
@@ -129,13 +151,17 @@ module.exports.addProducts =  async (req, res) => {
       },
       { new: true }
     );
-    
+
+    // Optionally, remove the local file after uploading
+    // fs.unlinkSync(req.file.path); // Uncomment if you want to delete the local file
+
     res.status(201).json({ message: "Product added successfully!" });
   } catch (err) {
     res.status(500).json({ err: err.message });
     console.log(err);
   }
-}
+};
+
 module.exports.getProductDetailToEdit = async(req,res)=>{
   console.log("getProductDetailToEdit called");
   const  productId = req.params.id;

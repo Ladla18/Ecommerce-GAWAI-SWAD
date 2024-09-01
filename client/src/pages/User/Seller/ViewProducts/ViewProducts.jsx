@@ -91,7 +91,7 @@ const [consumerId, setConsumerId] = useState();
             <Card className="product-card mt-3" style={{ height: "30rem" }}>
               <Card.Img
                 variant="top"
-                src={`https://ecommerce-gawai-swad.onrender.com/${p.productImage}`}
+                src={`${p.productImage}`}
                 alt={p.productName}
               />
               <Card.Body>

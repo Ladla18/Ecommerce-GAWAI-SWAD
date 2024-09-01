@@ -121,7 +121,7 @@ const SpecificProduct = () => {
       <div className="row product-container">
         <div className="col-md-6 text-center product-image-container">
           <img
-            src={`https://ecommerce-gawai-swad.onrender.com/${product.productImage}`}
+            src={`${product.productImage}`}
             className="product-image"
             alt={product.productName}
           />

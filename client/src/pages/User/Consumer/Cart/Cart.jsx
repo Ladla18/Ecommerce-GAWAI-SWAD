@@ -135,7 +135,7 @@ const Cart = () => {
                         <div className="row my-2">
                           <div className="col-sm-4">
                             <img
-                              src={`https://ecommerce-gawai-swad.onrender.com/${item.productimage}`}
+                              src={`${item.productimage}`}
                               width="100px"
                               alt=""
                             />

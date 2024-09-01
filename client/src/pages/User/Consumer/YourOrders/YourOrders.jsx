@@ -166,7 +166,7 @@ const navigate = useNavigate()
                           <tr key={product._id}>
                             <td style={tableCellStyle}>
                               <img
-                                src={`https://ecommerce-gawai-swad.onrender.com/${product.productimage}`}
+                                src={`${product.productimage}`}
                                 alt={product.productname}
                                 style={{
                                   width: "60px",
@@ -251,7 +251,7 @@ const navigate = useNavigate()
                           <tr key={sp._id}>
                             <td style={tableCellStyle}>
                               <img
-                                src={`https://ecommerce-gawai-swad.onrender.com/${sp.productImage}`}
+                                src={`${sp.productImage}`}
                                 alt={sp.productName}
                                 style={{
                                   width: "60px",
