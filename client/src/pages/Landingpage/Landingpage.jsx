@@ -126,7 +126,7 @@ const Landingpage = () => {
           <Modal.Title className="text-center">Snazzy Touch</Modal.Title>
         </Modal.Header>
         <Modal.Body className="py-5 h2">
-          This Web Application was built by{" "}
+          This Web Application was Developed by{" "}
           <span className="text-primary fw-bold">Amanullah Ansari</span> during
           an internship at{" "}
           <span className="fw-bold" style={{ color: "tomato" }}>
