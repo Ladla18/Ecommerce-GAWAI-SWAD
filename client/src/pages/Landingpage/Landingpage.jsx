@@ -8,6 +8,8 @@ import Footer from "../../components/Footer/Footer";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { jwtDecode } from "jwt-decode";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import "./Landingpage.css";
 
 const Landingpage = () => {
@@ -19,6 +21,7 @@ const Landingpage = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [showModal, setShowModal] = useState(true); // State for modal visibility
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -112,7 +115,19 @@ const Landingpage = () => {
 
   return (
     <>
-      
+      {/* Modal */}
+      <Modal show={showModal} style={{padding:"100px"}} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-center">Snazzy Touch</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="py-5 h2">
+          This Web Application was built by{" "}
+          <span className="text-primary fw-bold">Amanullah Ansari</span> during
+          an internship at <span className="fw-bold" style={{color:"tomato"}}>Softpro India.</span>
+        </Modal.Body>
+       
+      </Modal>
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-ms-12 p-0" style={{ position: "relative" }}>
@@ -220,7 +235,6 @@ const Landingpage = () => {
             </div>
           )}
         </div>
-      
       </div>
     </>
   );
