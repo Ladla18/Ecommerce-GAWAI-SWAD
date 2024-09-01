@@ -191,10 +191,15 @@ module.exports.updateSellerProduct = async (req, res) => {
   }
 };
 module.exports.deleteProduct = async(req,res)=>{
+  console.log("delete seller product called")
   const id = req.params.id
+  const sid = req.params.sid
+  console.log("sid",sid)
   try{
     const product = await AddProduct.findByIdAndDelete(id)
-   
+    const seller = await Seller.findById(sid)
+    seller.sellerproducts.pull(id)
+    await seller.save()
     res.status(200).json({message: "Product deleted successfully!"})
     }catch(err){
       res.status(500).json({err: err.message})

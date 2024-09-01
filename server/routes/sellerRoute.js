@@ -10,7 +10,7 @@ router.get("/sellerdashboard",authenticateToken,sellerController.sellerDashboard
 router.post("/addproduct",authenticateToken,sellerController.addProducts)
 router.get("/getproductforedit/:id",sellerController.getProductDetailToEdit);
 router.post("/updateproduct/:uid/:pid",sellerController.updateSellerProduct)
-router.delete("/deletesellerproduct/:id",sellerController.deleteProduct)
+router.delete("/deletesellerproduct/:id/:sid",sellerController.deleteProduct)
 router.get("/sellerorders/:sid",sellerController.sellerOrders);
 
 

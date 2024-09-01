@@ -4,14 +4,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Spinner, Alert, Card, Row, Col } from "react-bootstrap";
 import './ViewProducts.css'
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 const [status, setStatus] = useState("");
+const [consumerId, setConsumerId] = useState();
   useEffect(() => {
     const fetchProducts = async () => {
       const token = localStorage.getItem("token");
+       if (token) {
+         try {
+           const decodedToken = jwtDecode(token);
+           setConsumerId(decodedToken.user._id);
+         } catch (error) {
+           console.error("Failed to decode token", error);
+         }
+       }
       try {
         const response = await axios.get(
           "https://ecommerce-gawai-swad.onrender.com/api/viewproducts",
@@ -35,7 +45,7 @@ const [status, setStatus] = useState("");
     const handleRemoveItem = async (id) => {
       try {
         const response = await axios.delete(
-          `https://ecommerce-gawai-swad.onrender.com/api/deletesellerproduct/${id}`
+          `https://ecommerce-gawai-swad.onrender.com/api/deletesellerproduct/${id}/${consumerId}`
         );
         setStatus(response.data.message);
         setProducts(products.filter((item) => item._id !== id));
