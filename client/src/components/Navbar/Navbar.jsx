@@ -17,6 +17,9 @@ const Header = () => {
   const [userType, setUserType] = useState("");
   const [consumerId,setConsumerId] =useState()
   const [cartItems, setCartItems] = useState([]);
+  const [searchData,setSearchData] = useState({
+    searchBar:""
+  })
   const navigate = useNavigate();
 
   // Check login status and set user details
@@ -69,6 +72,16 @@ const Header = () => {
     navigate("/login");
   };
 
+  const handleSearchProduct = (e)=>{
+    setSearchData({...searchData,[e.target.name]:e.target.value})
+  }
+ const handleSearchButton = (e) => {
+   e.preventDefault(); // Prevent form submission
+   // Navigate to the landing page with the search query
+   navigate(`/?search=${encodeURIComponent(searchData.searchBar)}`);
+ };
+
+
   return (
     <div
       className="container-fluid p-0 position-sticky top-0 start-0 end-0"
@@ -92,11 +105,9 @@ const Header = () => {
             {/* Conditional Links Based on User Type */}
             {isLoggedIn && userType === "admin" ? (
               <Nav className="me-auto">
-                
                 <Nav.Link as={Link} to="/admindashboard">
                   Dashboard
                 </Nav.Link>
-               
               </Nav>
             ) : isLoggedIn && userType === "seller" ? (
               <Nav className="me-auto">
@@ -127,6 +138,30 @@ const Header = () => {
                 <Nav.Link as={Link} to="/kids">
                   Kids
                 </Nav.Link>
+                <div>
+                  <form
+                    action="" method="get"
+                    onSubmit={handleSearchButton}
+                    className="d-flex"
+                  >
+                    <div className="ms-4">
+                      <input
+                        type="text"
+                        placeholder="Search Our Products"
+                        name="searchBar"
+                        onChange={handleSearchProduct}
+                        value={searchData.searchBar}
+                        className="form-control"
+                        id=""
+                      />
+                    </div>
+                    <div>
+                      <button type="submit" className="btn btn-outline-warning ms-2">
+                        Search
+                      </button>
+                    </div>
+                  </form>
+                </div>
               </Nav>
             ) : (
               <Nav className="me-auto">
@@ -142,7 +177,9 @@ const Header = () => {
                 <>
                   <ConsumerNeed
                     userDetail={
-                      userDetail.consumername || userDetail.sellername || userDetail.adminemail
+                      userDetail.consumername ||
+                      userDetail.sellername ||
+                      userDetail.adminemail
                     }
                     logout={logout}
                   />

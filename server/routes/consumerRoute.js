@@ -21,4 +21,5 @@ router.post("/addtowishlist/:sid/:pid/:cid",consumerController.addToWishList)
 router.get("/fetchwishlist/:cid",consumerController.fetchWishlist);
 router.delete("/deletewishlist/:wid",consumerController.deleteWishlistItems)
 router.post("/sendemail",consumerController.sendEmail)
+router.get("/searchproduct/search",consumerController.searchProduct);
 module.exports = router

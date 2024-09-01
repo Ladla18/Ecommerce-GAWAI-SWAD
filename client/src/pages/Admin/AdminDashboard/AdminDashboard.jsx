@@ -236,12 +236,21 @@ const AdminDashboard = () => {
                         >
                           More Info
                         </Button>
-                        <Button
-                          variant="danger"
-                          onClick={() => bannedSeller(s._id)}
-                        >
-                          Ban Seller
-                        </Button>
+                        {s.isBanned === false ? (
+                          <Button
+                            variant="danger"
+                            onClick={() => bannedSeller(s._id)}
+                          >
+                            Ban Seller
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="secondary"
+                            onClick={() => bannedSeller(s._id)}
+                          >
+                            Banned
+                          </Button>
+                        )}
                         <Button
                           variant="dark ms-1"
                           onClick={() => deleteSeller(s._id)}

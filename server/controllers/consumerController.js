@@ -507,3 +507,47 @@ module.exports.deleteWishlistItems = async (req, res) => {
     json({ message: "Error during deleting" });
   }
 };
+
+
+
+module.exports.searchProduct = async (req, res) => {
+  console.log("Search product called");
+  const query = req.query.query;
+
+  if (!query) {
+    return res.status(400).json({ message: "Search query is required" });
+  }
+
+  try {
+    // Split the query into individual words
+    const words = query.split(/\s+/); // Split by spaces
+
+    // Create an array of regular expressions for each word
+    const regexArray = words.map((word) => new RegExp(word, "i"));
+
+    console.log("Search Regex Array:", regexArray);
+
+    // Create an array of search conditions for each field
+    const searchConditions = regexArray.map((regex) => ({
+      $or: [
+        { productName: regex },
+        
+        // Add other fields as needed
+      ],
+    }));
+
+    console.log("Search Conditions:", searchConditions);
+
+    // Combine all search conditions with $or
+    const products = await AddProduct.find({
+      $or: searchConditions,
+    });
+
+    console.log("Search Results:", products);
+
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
