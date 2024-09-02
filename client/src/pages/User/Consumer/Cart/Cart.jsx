@@ -10,6 +10,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalItem, setTotalItem] = useState(0);
   const [status, setStatus] = useState("");
+  const [consumerEmail,setConsumerEmail] = useState()
   const [statusName, setStatusName] = useState("");
   const navigate = useNavigate();
   document.title = "Cart";
@@ -24,6 +25,7 @@ const Cart = () => {
       // Access the user ID or other information
       const userId = decodedToken.user._id; // Change 'user._id' to the actual key used in your JWT payload
       setConsumerId(userId);
+      setConsumerEmail(decodedToken.user.consumeremail)
       console.log("User ID:", userId);
     }
   }, []); // This effect runs once to set the consumerId
@@ -83,6 +85,36 @@ const Cart = () => {
       console.log(err);
     }
   };
+  const descreaseQuantity = async (id, currentQuantity) => {
+    const newQuantity = currentQuantity - 1;
+    try {
+      await axios.post(
+        `https://ecommerce-gawai-swad.onrender.com/api/updatequantity/${id}`,
+        {
+          updatedQauntity: newQuantity,
+        }
+      );
+
+      setCartItems(
+        cartItems.map((item) =>
+          item._id === id ? { ...item, productquantity: newQuantity } : item
+        )
+      );
+      const total = cartItems.reduce(
+        (acc, item) =>
+          acc +
+          (item._id === id
+            ? item.productprice * newQuantity
+            : item.productprice * item.productquantity),
+        0
+      );
+      setTotalPrice(total);
+      setTotalItem(cartItems.length);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   const handleRemoveItem = async (id) => {
     try {
@@ -106,6 +138,12 @@ const Cart = () => {
       console.log(response.data);
       setCartItems((prevItems) => prevItems.filter((item) => !item._id));
       setStatus("Order Is Place Successfully");
+      let response2 = await axios.post(
+        "https://ecommerce-gawai-swad.onrender.com/api/sendemail",
+        {
+          email: consumerEmail,
+        }
+      );
     } catch (err) {
       console.log(err);
     }
@@ -150,6 +188,15 @@ const Cart = () => {
                         <div className="d-flex border border-3 border-dark rounded-1 d-inline-block">
                           <div className=" d-inline-block px-2 ms-3 my-2">
                             {item.productquantity}
+                          </div>
+                          <div
+                            className="ms-auto me-4 mt-2 fw-bold"
+                            style={{ cursor: "pointer" }}
+                            onClick={() =>
+                              descreaseQuantity(item._id, item.productquantity)
+                            }
+                          >
+                            -
                           </div>
                           <div
                             className="ms-auto me-4 mt-2 fw-bold"

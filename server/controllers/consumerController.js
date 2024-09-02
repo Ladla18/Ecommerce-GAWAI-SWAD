@@ -246,8 +246,12 @@ module.exports.sendEmail = async (req, res) => {
     from: "bsoft0727@gmail.com",
     to: email,
     subject: "Shopping",
-    text: `Thank you for Ordering ${productname} of ${productprice} from ${seller}`,
-    html: `<h1 style="color: blue; text-align: center;">Thank You</h1> </br>    `,
+    text: `Thank you for Ordering ${productname || "Our Prouduct"} of ${
+      productprice || "Good Price"
+    } from ${seller || "Our seller"}`,
+    html: `<h1 style="color: blue; text-align: center;">Thank You for Ordering ${
+      productname || "Our Product"
+    }</h1> </br>    `,
   };
 
   try {
