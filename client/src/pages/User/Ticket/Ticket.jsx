@@ -110,7 +110,9 @@ const Ticket = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      return navigate("/");
+      
+      alert("Please Login");
+      return navigate("/") 
     }
   });
   
