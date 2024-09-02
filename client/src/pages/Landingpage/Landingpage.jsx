@@ -154,6 +154,11 @@ const Landingpage = () => {
           </div>
         </div>
         <div className="container" style={{ position: "relative" }}>
+          <div className="row">
+            <div className="col-sm-12 h3 mt-3">
+              <marquee behavior="" direction="" className='text-danger' >50% Off Sale Is live Now . Order Now</marquee>
+            </div>
+          </div>
           <div className="row mt-4 d-flex justify-content-center">
             <div className="col-sm-12 text-center border-bottom h4 border-3 border-dark w-25 py-3">
               Best Sellers
