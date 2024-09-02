@@ -39,6 +39,11 @@ const SignupConsumer = () => {
       setError("Passwords do not match");
       return;
     }
+    if(formData.consumerpassword.length<=6){
+      setError("Password Length Must be  greater than 6");
+      return
+
+    }
     setLoading(true); // Set loading to true when the form is submitted
     try {
       const response = await axios.post(

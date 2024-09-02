@@ -51,6 +51,10 @@ const SignupSeller = () => {
       setError("Passwords do not match");
       return;
     }
+    if(sellerpassword.length<=6){
+      setError("Password is Short")
+      return
+    }
 
     if (!agreeToTerms) {
       setError("Please agree to our terms");
