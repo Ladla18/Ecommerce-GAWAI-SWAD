@@ -127,6 +127,7 @@ const Landingpage = () => {
         </Modal.Header>
         <Modal.Body className="py-5 h2">
           This Web Application was Developed by{" "}
+          <span className="text-primary fw-bold">Nawed Zafar</span> &{" "}
           <span className="text-primary fw-bold">Amanullah Ansari</span> during
           an internship at{" "}
           <span className="fw-bold" style={{ color: "tomato" }}>
@@ -156,7 +157,9 @@ const Landingpage = () => {
         <div className="container" style={{ position: "relative" }}>
           <div className="row">
             <div className="col-sm-12 h3 mt-3">
-              <marquee behavior="" direction="" className='text-danger' >50% Off Sale Is live Now . Order Now</marquee>
+              <marquee behavior="" direction="" className="text-danger">
+                50% Off Sale Is live Now . Order Now
+              </marquee>
             </div>
           </div>
           <div className="row mt-4 d-flex justify-content-center">
@@ -190,10 +193,7 @@ const Landingpage = () => {
             <div className="row mt-5">
               {displayProducts.map((p) => (
                 <div className="col-sm-3 col-6 mt-4" key={p._id}>
-                  <Card
-                    className="product-card "
-                   
-                  >
+                  <Card className="product-card ">
                     <div
                       className="p-0 m-0"
                       style={{
