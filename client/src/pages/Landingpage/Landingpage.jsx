@@ -128,10 +128,9 @@ const Landingpage = () => {
         <Modal.Body className="py-5 h2">
           This Web Application was Developed by{" "}
           <span className="text-primary fw-bold">Nawed Zafar</span> &{" "}
-          <span className="text-primary fw-bold">Amanullah Ansari</span> during
-          an internship at{" "}
+          <span className="text-primary fw-bold">Amanullah Ansari</span> As a{" "}
           <span className="fw-bold" style={{ color: "tomato" }}>
-            Softpro India.
+            Personal Project
           </span>
         </Modal.Body>
       </Modal>
